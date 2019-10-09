@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<odoo>
+    <report id="action_library_book_report"
+        string="Library Books"
+        model="library.book"
+        report_type="qweb-pdf"
+        name="library_app.report_library_book_template1" />
+    <template id="report_library_book_template1">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <!-- Report header content -->
+                    <div class="container">
+                        <div class="row bg-primary">
+<!--                            <div class="col-3">Cover</div>-->
+                            <div class="col-2">Title</div>
+                            <div class="col-2">Publisher</div>
+                            <div class="col-2">Date</div>
+                            <div class="col-2">Publisher Address</div>
+                            <div class="col-2">Authors</div>
+                            <div class="col-1">Price</div>
+                            <div class="col-1">On Sale</div>
+                        </div>
+                        <t t-foreach="docs" t-as="o">
+                            <div class="row">
+                                <!-- Report row content -->
+<!--                                <div class="col-3">-->
+<!--                                    <span t-field="o.image" t-options="{'widget':'image'}"/>-->
+<!--                                </div>-->
+                                <div class="col-2">
+                                    <h4>
+                                        <span t-field="o.name"/>
+                                    </h4>
+                                </div>
+                                <div class="col-2">
+                                    <span t-field="o.publisher_id"/>
+                                </div>
+                                <div class="col-2">
+                                    <span t-field="o.date_published"
+                                          t-options='{"widget": "date"}'/>
+                                </div>
+                                <div class="col-2">
+                                    <span t-field="o.publisher_id"
+                                        t-options='{
+                                            "widget": "contact",
+                                            "fields": ["address", "email", "phone", "website"],
+                                            "no_marker": false}'/>
+                                </div>
+                                <ul>
+                                    <t t-foreach="o.author_ids" t-as="author">
+                                        <li class="media">
+                                            <span t-field="author.image_small"
+                                            t-options="{'widget':'image'}"/>
+                                            <div class="media-body">
+                                                <p class="mt-0">
+                                                    <span t-field="author.name"/>
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </t>
+                                </ul>
+                                <div class="clo-1">
+                                    <span t-field="o.price"/>
+                                </div>
+                                <div class="clo-1">
+                                    <span t-field="o.on_sale"/>
+                                </div>
+                            </div>
+                        </t>
+                        <!-- Report footer content -->
+                    </div>
+
+                        <!-- Report row content -->
+                </div>
+                    <!-- Report footer content -->
+            </t>
+        </t>
+    </template>
+</odoo>

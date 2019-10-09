@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--定义菜单按钮-->
+    <menuitem id="menu_library" name="Library"/>
+
+    <!--定义窗口界面-->
+    <act_window id="action_library_book"
+            name="Library Books"
+            res_model="library.book"
+            view_mode="tree,form"/>
+
+    <!--操作窗口的菜单-->
+    <menuitem id="menu_library_book"
+          name="Books"
+          parent="menu_library"
+          action="action_library_book"/>
+
+</odoo>
